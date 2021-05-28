@@ -272,6 +272,10 @@ set_property -dict {PACKAGE_PIN G13   IOSTANDARD LVCMOS18  } [get_ports {FMC_GCL
 set_property -dict {PACKAGE_PIN E15   IOSTANDARD LVCMOS18  } [get_ports {FMC_GCLK1_M2C_N}]
 set_property -dict {PACKAGE_PIN F15   IOSTANDARD LVCMOS18  } [get_ports {FMC_GCLK1_M2C_P}]
 
+# I2C_PL
+set_property -dict {PACKAGE_PIN C7    IOSTANDARD LVCMOS18  } [get_ports {I2C_SCL_PL}]
+set_property -dict {PACKAGE_PIN D2    IOSTANDARD LVCMOS18  } [get_ports {I2C_SDA_PL}]
+
 # LED
 set_property -dict {PACKAGE_PIN E7    IOSTANDARD LVCMOS18  } [get_ports {LED0_PL_N}]
 set_property -dict {PACKAGE_PIN H2    IOSTANDARD LVCMOS18  } [get_ports {LED1_PL_N}]

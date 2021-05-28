@@ -277,6 +277,10 @@ entity Mercury_XU6_PE1 is
     FMC_GCLK1_M2C_N                : inout   std_logic;
     FMC_GCLK1_M2C_P                : inout   std_logic;
     
+    -- I2C_PL
+    I2C_SCL_PL                     : inout   std_logic;
+    I2C_SDA_PL                     : inout   std_logic;
+    
     -- LED
     LED0_PL_N                      : out     std_logic;
     LED1_PL_N                      : out     std_logic;
@@ -299,10 +303,25 @@ architecture rtl of Mercury_XU6_PE1 is
       Clk100              : out    std_logic;
       Clk50               : out    std_logic;
       Rst_N               : out    std_logic;
+      IIC_1_sda_i         : in     std_logic;
+      IIC_1_sda_o         : out    std_logic;
+      IIC_1_sda_t         : out    std_logic;
+      IIC_1_scl_i         : in     std_logic;
+      IIC_1_scl_o         : out    std_logic;
+      IIC_1_scl_t         : out    std_logic;
       LED_N               : out    std_logic_vector(3 downto 0)
     );
     
   end component Mercury_XU6;
+  
+  component IOBUF is
+  port (
+  	I : in STD_LOGIC;
+  	O : out STD_LOGIC;
+  	T : in STD_LOGIC;
+  	IO : inout STD_LOGIC
+  );
+  end component IOBUF;
 
   ---------------------------------------------------------------------------------------------------
   -- signal declarations
@@ -310,6 +329,12 @@ architecture rtl of Mercury_XU6_PE1 is
   signal Clk100           : std_logic;
   signal Clk50            : std_logic;
   signal Rst_N            : std_logic;
+  signal IIC_1_sda_i      : std_logic;
+  signal IIC_1_sda_o      : std_logic;
+  signal IIC_1_sda_t      : std_logic;
+  signal IIC_1_scl_i      : std_logic;
+  signal IIC_1_scl_o      : std_logic;
+  signal IIC_1_scl_t      : std_logic;
   signal LED_N            : std_logic_vector(3 downto 0);
   signal LedCount         : unsigned(23 downto 0);
 
@@ -323,9 +348,29 @@ begin
       Clk100               => Clk100,
       Clk50                => Clk50,
       Rst_N                => Rst_N,
+      IIC_1_sda_i          => IIC_1_sda_i,
+      IIC_1_sda_o          => IIC_1_sda_o,
+      IIC_1_sda_t          => IIC_1_sda_t,
+      IIC_1_scl_i          => IIC_1_scl_i,
+      IIC_1_scl_o          => IIC_1_scl_o,
+      IIC_1_scl_t          => IIC_1_scl_t,
       LED_N                => LED_N
     );
   
+  IIC_1_PL_scl_iobuf: component IOBUF
+  port map (
+   I => IIC_1_scl_o,
+   IO => I2C_SCL_PL,
+   O => IIC_1_scl_i,
+   T => IIC_1_scl_t
+  );
+  IIC_1_PL_sda_iobuf: component IOBUF
+  port map (
+   I => IIC_1_sda_o,
+   IO => I2C_SDA_PL,
+   O => IIC_1_sda_i,
+   T => IIC_1_sda_t
+  );
   process (Clk50)
   begin
     if rising_edge (Clk50) then
