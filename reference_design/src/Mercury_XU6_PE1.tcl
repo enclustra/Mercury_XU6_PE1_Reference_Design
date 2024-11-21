@@ -1,5 +1,5 @@
-# ----------------------------------------------------------------------------------
-# Copyright (c) 2022 by Enclustra GmbH, Switzerland.
+# ----------------------------------------------------------------------------------------------------
+# Copyright (c) 2024 by Enclustra GmbH, Switzerland.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy of
 # this hardware, software, firmware, and associated documentation files (the
@@ -17,7 +17,7 @@
 # HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 # PRODUCT OR THE USE OR OTHER DEALINGS IN THE PRODUCT.
-# ----------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------
 
 set_property BITSTREAM.CONFIG.OVERTEMPSHUTDOWN ENABLE [current_design]
  
@@ -283,5 +283,5 @@ set_property -dict {PACKAGE_PIN P9    IOSTANDARD LVCMOS18  } [get_ports {LED2_PL
 set_property -dict {PACKAGE_PIN K5    IOSTANDARD LVCMOS18  } [get_ports {LED3_PL_N}]
 
 # PE1 SI5338 CLK3
-set_property -dict {PACKAGE_PIN AF12  IOSTANDARD LVCMOS18  } [get_ports {OSC_N}]
-set_property -dict {PACKAGE_PIN AE12  IOSTANDARD LVCMOS18  } [get_ports {OSC_P}]
+set_property -dict {PACKAGE_PIN AF12  IOSTANDARD DIFF_SSTL18_I} [get_ports {OSC_N}]
+set_property -dict {PACKAGE_PIN AE12  IOSTANDARD DIFF_SSTL18_I} [get_ports {OSC_P}]
